@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "543114283822",
+    "firebase_url": "https://mooo-fb32a.firebaseio.com",
+    "project_id": "mooo-fb32a",
+    "storage_bucket": "mooo-fb32a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543114283822:android:aad078f161409a75d448bf",
+        "android_client_info": {
+          "package_name": "com.example.moo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543114283822-bu7d5squbphsu1b70dcj03k8i73e8cvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtEZtn8qdAVlu9In8lU4Tc1xVc55yjZdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543114283822-bu7d5squbphsu1b70dcj03k8i73e8cvq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "543114283822-u2jd63bjjr7m0ofubl0a241l7hb34jik.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mooApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
