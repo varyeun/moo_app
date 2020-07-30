@@ -6,6 +6,8 @@ import 'package:moo_app/ui/pages/add_event.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:moo_app/ui/pages/view_event.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
 void main() {
   runApp(MaterialApp(
     home: MooRecord(),
@@ -173,6 +175,12 @@ class _MooRecordState extends State<MooRecord> with TickerProviderStateMixin {
                                   eventDBS.removeItem(event.id.toString()),
                                   setState(() {
                                     _selectedEvents.remove(event);
+                                    if(event.imgURL.length>0){
+
+                                      StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child("events/${event.eventDate.toString()}") ;
+                                      firebaseStorageRef.delete();
+                                    }
+                                    _selectedEvents = _selectedEvents;
                                   })
                                 })
                       ],

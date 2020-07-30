@@ -7,7 +7,7 @@ import 'package:flutter_emoji/flutter_emoji.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'dart:developer';
+
 
 class AddEventPage extends StatefulWidget {
   final EventModel note;
@@ -117,7 +117,7 @@ class _AddEventPageState extends State<AddEventPage> {
               MaterialButton(
                 child: Text("사진도 넣을 수 있어요! " + camera,
                     style: new TextStyle(fontSize: 16.0, color: Colors.white)),
-                padding: EdgeInsets.symmetric(horizontal: 80.0),
+                padding: EdgeInsets.symmetric(horizontal: 50.0),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)),
                 color: HexColor("#b0c5c6"),
@@ -164,7 +164,8 @@ class _AddEventPageState extends State<AddEventPage> {
                                 processing = true;
                               });
                               if(_image!=null){
-                                StorageReference storageReference = _firebaseStorage.ref().child("events/${_eventDate.toString()}");
+                                int n = _eventDate.toString().length;
+                                StorageReference storageReference = _firebaseStorage.ref().child("events/${_eventDate.toString().substring(0,n-3)}");
                                 StorageUploadTask storageUploadTask = storageReference.putFile(_image);
                                 await storageUploadTask.onComplete;
                                 downloadURL = await storageReference.getDownloadURL();
