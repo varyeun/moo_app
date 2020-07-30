@@ -143,16 +143,19 @@ class _MooRecordState extends State<MooRecord> with TickerProviderStateMixin {
                             child: Text(event.eventDate.hour.toString() +
                                 ":" +
                                 event.eventDate.minute.toString())),
-                         trailing: event.imgURL.length>0 ? new ConstrainedBox(
+                         trailing: event.imgURL.length>0 ?
+                        new ConstrainedBox(
                            constraints: BoxConstraints(
                              minWidth: 44,
                              minHeight: 44,
                              maxWidth: 64,
                              maxHeight: 64,
                            ),
-                           child: Image.asset(event.imgURL),
-                         ) : null,
-                        onTap: () {
+                           child: Image.network(event.imgURL),
+                         )
+                         : null,
+            onTap: ()
+             {
                           Navigator.push(
                               context,
                               MaterialPageRoute(

@@ -7,6 +7,7 @@ import 'package:flutter_emoji/flutter_emoji.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:developer';
 
 class AddEventPage extends StatefulWidget {
   final EventModel note;
@@ -40,6 +41,7 @@ class _AddEventPageState extends State<AddEventPage> {
   final _key = GlobalKey<ScaffoldState>();
   bool processing;
   File _image;
+  String downloadURL;
 
   void _uploadImageToStorage(ImageSource source) async {
     File image = await ImagePicker.pickImage(source: source);
@@ -161,29 +163,31 @@ class _AddEventPageState extends State<AddEventPage> {
                               setState(() {
                                 processing = true;
                               });
+                              if(_image!=null){
+                                StorageReference storageReference = _firebaseStorage.ref().child("events/${_eventDate.toString()}");
+                                StorageUploadTask storageUploadTask = storageReference.putFile(_image);
+                                await storageUploadTask.onComplete;
+                                downloadURL = await storageReference.getDownloadURL();
 
+                              }
                               if (widget.note != null) {
                                 await eventDBS.updateData(widget.note.id, {
                                   "description": _description.text,
                                   "event_date": widget.note.eventDate,
-                                  "imgURL": _image != null ? _image.path : "",
+                                  "imgURL": _image != null ? downloadURL : "",
                                 });
                               } else {
                                 await eventDBS.createItem(EventModel(
                                     description: _description.text,
                                     eventDate: _eventDate,
-                                    imgURL: _image != null ? _image.path : ""));
+                                    imgURL: _image != null ? downloadURL : ""));
                               }
                               Navigator.of(context).pop();
                               setState(() {
                                 processing = false;
                               });
                             }
-                            if(_image!=null){
-                              StorageReference storageReference = _firebaseStorage.ref().child("events/$_image");
-                              StorageUploadTask storageUploadTask = storageReference.putFile(_image);
-                              await storageUploadTask.onComplete;
-                            }
+
                           },
                           child: Text(
                             "기록하기",

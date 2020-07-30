@@ -37,7 +37,7 @@ class EventDetailsPage extends StatelessWidget {
             SizedBox(height: 10.0),
             Text(event.description, style: Theme.of(context).textTheme.headline6),
             SizedBox(height: 15.0),
-            event.imgURL.length>0 ? Image.asset(event.imgURL):new Container(),
+            event.imgURL.length>0 ? Image.network(event.imgURL):new Container(),
             SizedBox(height: 10.0),
           ],
         ),
